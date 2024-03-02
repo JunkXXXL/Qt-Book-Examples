@@ -11,3 +11,9 @@ Window::Window()
     layout->addWidget(btn);
     connect(btn, SIGNAL(clicked(bool)),this,SLOT(close()));
 };
+
+Window::~Window()
+{
+    delete area;
+    delete btn;
+}
