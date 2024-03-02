@@ -7,23 +7,18 @@
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
 {
-    codec = QTextCodec::codecForName("Windows-1251");
     setWindowTitle("Возведение в квадрат");
     frame = new QFrame(this);
     frame->setFrameShadow(QFrame::Raised);
     frame->setFrameShape(QFrame::Panel);
-    inputLabel = new QLabel("Введите число:",
-                            this);
+    inputLabel = new QLabel("Введите число:", this);
     inputEdit = new QLineEdit("",this);
     StrValidator *v=new StrValidator(inputEdit);
     inputEdit->setValidator(v);
-    outputLabel = new QLabel("Результат:",
-                             this);
+    outputLabel = new QLabel("Результат:", this);
     outputEdit = new QLineEdit("",this);
-    nextButton = new QPushButton("Следующее",
-                                 this);
-    exitButton = new QPushButton("Выход",
-                                 this);
+    nextButton = new QPushButton("Следующее", this);
+    exitButton = new QPushButton("Выход", this);
     // компоновка приложения выполняется согласно рисунку 2
     QVBoxLayout *vLayout1 = new QVBoxLayout(frame);
     vLayout1->addWidget(inputLabel);
@@ -53,6 +48,13 @@ Widget::Widget(QWidget *parent)
 
 Widget::~Widget()
 {
+    delete frame;
+    delete inputLabel;
+    delete inputEdit;
+    delete outputLabel;
+    delete outputEdit;
+    delete nextButton;
+    delete exitButton;
 }
 
 void Widget::begin()
