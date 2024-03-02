@@ -32,3 +32,13 @@ Win::Win(QWidget *parent): QWidget(parent)
     connect(exitbutton,SIGNAL(clicked(bool)),
             this,SLOT(close()));
 }
+
+Win::~Win()
+{
+    delete label1;
+    delete label2;
+    delete edit1;
+    delete edit2;
+    delete calcbutton;
+    delete exitbutton;
+}
