@@ -3,6 +3,7 @@
 #include<QHBoxLayout>
 #include<QTextCodec>
 #include<QMessageBox>
+#include<QPushButton>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -35,23 +36,19 @@ Widget::Widget(QWidget *parent)
     hLayout->addWidget(frame);
     hLayout->addLayout(vLayout2);
     begin();
-    connect(exitButton,SIGNAL(clicked(bool)),
-            this,SLOT(close()));
-    connect(nextButton,SIGNAL(clicked(bool)),
-            this,SLOT(begin()));
-    connect(inputEdit,SIGNAL(returnPressed()),
-            this,SLOT(calc()));
+
+    connect(exitButton, QPushButton::clicked,
+            this,QWidget::close);
+
+    connect(nextButton, QPushButton::clicked,
+            this,Widget::begin);
+
+    connect(inputEdit, QLineEdit::returnPressed,
+            this,Widget::calc);
 }
 
 Widget::~Widget()
 {
-    delete frame;
-    delete inputLabel;
-    delete inputEdit;
-    delete outputLabel;
-    delete outputEdit;
-    delete nextButton;
-    delete exitButton;
 }
 
 void Widget::begin()
