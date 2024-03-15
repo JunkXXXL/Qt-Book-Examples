@@ -13,13 +13,13 @@ Widget::Widget(QWidget *parent)
     frame->setFrameShape(QFrame::Panel);
     inputLabel = new QLabel("Введите число:", this);
     inputEdit = new QLineEdit("",this);
-    StrValidator *v=new StrValidator(inputEdit);
+    StrValidator *v = new StrValidator(inputEdit);
     inputEdit->setValidator(v);
     outputLabel = new QLabel("Результат:", this);
     outputEdit = new QLineEdit("",this);
     nextButton = new QPushButton("Следующее", this);
     exitButton = new QPushButton("Выход", this);
-    // компоновка приложения выполняется согласно рисунку 2
+
     QVBoxLayout *vLayout1 = new QVBoxLayout(frame);
     vLayout1->addWidget(inputLabel);
     vLayout1->addWidget(inputEdit);
@@ -41,9 +41,6 @@ Widget::Widget(QWidget *parent)
             this,SLOT(begin()));
     connect(inputEdit,SIGNAL(returnPressed()),
             this,SLOT(calc()));
-
-
-
 }
 
 Widget::~Widget()
@@ -73,7 +70,7 @@ void Widget::calc()
 {
     bool Ok=true; float r,a;
     QString str=inputEdit->text();
-    a=str.toDouble(&Ok);
+    a=str.toDouble(&Ok); //диапазон 10^-308 до 10^308
     if (Ok)
     {
         r=a*a;
