@@ -4,6 +4,8 @@
 #include<QTextCodec>
 #include<QMessageBox>
 #include<QPushButton>
+#include<limits>
+#include<QDebug>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -37,14 +39,11 @@ Widget::Widget(QWidget *parent)
     hLayout->addLayout(vLayout2);
     begin();
 
-    connect(exitButton, QPushButton::clicked,
-            this,QWidget::close);
+    connect(exitButton, &QPushButton::clicked,this, &QWidget::close);
 
-    connect(nextButton, QPushButton::clicked,
-            this,Widget::begin);
+    connect(nextButton, &QPushButton::clicked,this, &Widget::begin);
 
-    connect(inputEdit, QLineEdit::returnPressed,
-            this,Widget::calc);
+    connect(inputEdit, &QLineEdit::returnPressed, this, &Widget::calc);
 }
 
 Widget::~Widget()
@@ -68,9 +67,10 @@ void Widget::calc()
     bool Ok=true; float r,a;
     QString str=inputEdit->text();
     a=str.toDouble(&Ok); //диапазон 10^-308 до 10^308
-    if (Ok)
+    r=a*a;
+    qDebug() << r;
+    if (Ok and r < std::numeric_limits<double>::max())
     {
-        r=a*a;
         str.setNum(r);
         outputEdit->setText(str);
         inputEdit->setEnabled(false);
@@ -79,6 +79,14 @@ void Widget::calc()
         nextButton->setDefault(true);
         nextButton->setEnabled(true);
         nextButton->setFocus();
+    }
+    else if (r >= std::numeric_limits<double>::max())
+    {
+        QMessageBox msgBox(QMessageBox::Information,
+                           "Возведение в квадрат.",
+                           "Возведённое в квадрат число слишком большое",
+                           QMessageBox::Ok);
+        msgBox.exec();
     }
     else
         if (!str.isEmpty())
