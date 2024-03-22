@@ -4,11 +4,11 @@
 #include "area.h"
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <iostream>
 
 class Window : public QWidget
 {
 protected:
-    QTextCodec *codec;
     Area * area; // область отображения рисунка
     QPushButton * btn;
 

@@ -10,7 +10,7 @@ Area::Area(QWidget *parent):QWidget(parent)
 
 void Area::showEvent(QShowEvent * event)
 {
-    MyTimer=startTimer(50); // создать таймер
+    MyTimer=startTimer(50); // создать таймер; interval milliseconds
 }
 
 void Area::paintEvent(QPaintEvent *)
@@ -23,14 +23,13 @@ void Area::paintEvent(QPaintEvent *)
 
 void Area::timerEvent(QTimerEvent *event)
 {
-
     if (event->timerId() == MyTimer) // если наш таймер
     {
         alpha=alpha+0.2;
         update(); // обновить внешний вид
     }
     else
-        QWidget::timerEvent(event); // иначе передать для стандартной
+        QWidget::timerEvent(event); // иначе передать для стандартной обработки
 }
 
 void Area::hideEvent(QHideEvent *)

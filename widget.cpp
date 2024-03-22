@@ -7,9 +7,17 @@ Window::Window()
 
     btn = new QPushButton("Завершить",this );
     QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->addWidget(area);
-    layout->addWidget(btn);
-    connect(btn, SIGNAL(clicked(bool)),this,SLOT(close()));
+    if (layout == nullptr)
+    {
+        std::cerr << "no enough memory";
+    }
+    else
+    {
+        layout->addWidget(area);
+        layout->addWidget(btn);
+    }
+
+    connect(btn, &QPushButton::clicked, this, &QWidget::close);
 };
 
 Window::~Window()

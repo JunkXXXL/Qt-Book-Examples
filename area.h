@@ -1,5 +1,3 @@
-#ifndef AREA_H
-#define AREA_H
 #include "figura.h"
 #include <QWidget>
 #include<QDebug>
@@ -20,4 +18,3 @@ protected:
     void hideEvent(QHideEvent * event);
 };
 
-#endif // AREA_H
