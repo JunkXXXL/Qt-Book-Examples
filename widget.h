@@ -8,12 +8,19 @@
 #include <QLineEdit>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QMessageBox>
+#include <QDebug>
+#include <iostream>
+#include <QCoreApplication>
 
 class Counter: public QLineEdit
 {
     Q_OBJECT
 public:
-    Counter(const QString & contents, QWidget *parent=nullptr): QLineEdit(contents, parent){}
+    Counter(const QString & contents, QWidget *parent=nullptr): QLineEdit(contents, parent)
+    {
+        this->setReadOnly(true);
+    }
 signals:
     void tick_signal();
 public slots:
