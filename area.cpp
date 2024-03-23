@@ -28,8 +28,6 @@ void Area::timerEvent(QTimerEvent *event)
         alpha=alpha+0.2;
         update(); // обновить внешний вид
     }
-    else
-        QWidget::timerEvent(event); // иначе передать для стандартной обработки
 }
 
 void Area::hideEvent(QHideEvent *)
